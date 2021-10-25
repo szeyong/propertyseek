@@ -29,7 +29,7 @@ router.put("/:id", async (req, res) => {
                 res.status(500).json(err);
             }
         } else {
-            res.status(401).json("You can update only your property!");
+            res.status(401).json("You are not authorised to update this property.");
         }
     } catch (err) {
         res.status(500).json(err);
@@ -43,19 +43,19 @@ router.delete("/:id", async (req, res) => {
         if (property.username === req.body.username) {
             try {
                 await property.delete();
-                res.status(200).json("Property has been deleted!");
+                res.status(200).json("Success: Property has been deleted!");
             } catch (err) {
                 res.status(500).json(err);
             }
         } else {
-            res.status(401).json("You can delete only your property!");
+            res.status(401).json("You are not authorised to delete this property.");
         }
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-//GET PROPERTY
+// VIEW PROPERTY
 router.get("/:id", async (req, res) => {
     try {
         const property = await Property.findById(req.params.id);
@@ -65,8 +65,9 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-//GET ALL PROPERTIES
+// VIEW ALL PROPERTIES
 router.get("/", async (req, res) => {
+    // query by ?
     const username = req.query.user;
     const categoryType = req.query.category;
 
@@ -76,7 +77,7 @@ router.get("/", async (req, res) => {
             properties = await Property.find({ username });
         } else if (categoryType) {
             properties = await Property.find({
-                categories: { $in: [categoryType] },
+                category: { $in: categoryType },
             });
         } else {
         properties = await Property.find();

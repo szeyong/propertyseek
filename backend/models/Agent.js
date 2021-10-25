@@ -15,7 +15,7 @@ const AgentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    profilePic: {
+    profileImage: {
         type: String,
         default: "",
     },

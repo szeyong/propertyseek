@@ -21,7 +21,7 @@ router.put("/:id", async (req,res) => {
             res.status(500).json(err);
         }
     } else {
-        res.status(401).json("You can only access and update your own account!");
+        res.status(401).json("You are not authorised to update this account.");
     }
 });
 
@@ -41,7 +41,7 @@ router.delete("/:id", async (req, res) => {
             res.status(404).json("Agent not found!");
         }
     } else {
-      res.status(401).json("You can only delete your own account!");
+      res.status(401).json("You are not authorised to delete this account.");
     }
   });
   
