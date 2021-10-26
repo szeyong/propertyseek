@@ -1,46 +1,91 @@
-import React from 'react'
-import "./profilesetting.css";
+import { useContext, useState } from "react";
+import { Context } from "../context/Context";
+import axios from "axios";
+import "./stylepages.css";
 
 const ProfileSetting = () => {
+    // const [file, setFile] = useState(null);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [success, setSuccess] = useState(false);
+  
+    const { user, dispatch } = useContext(Context);
+
+    const uri = "http://localhost:5000/api/"
+
+    // const ImageFolderUri = "http://localhost:5000/images/";
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        dispatch({ type: "UPDATE_START" });
+
+        const updatedAgent = {
+            userId: user._id,
+            username,
+            email,
+            password,
+        };
+
+        try {
+            const res = await axios.put(uri + "agent/" + user._id, updatedAgent);
+            setSuccess(true);
+            dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+
+        } catch (err) {
+            dispatch({ type: "UPDATE_FAILURE" });
+        }
+    };
+
     return (
-        <div className="settings">
-        <div className="settingsWrapper">
-            <div className="settingsTitle">
-                <span className="settingsTitleUpdate">Update Your Account</span>
-                <span className="settingsTitleDelete">Delete Account</span>
-            </div>
-            <form className="settingsForm">
-                <label>Profile Picture</label>
-                <div className="settingsPP">
-                    <img
-                        src="https://i.mydramalist.com/ej4LE_5c.jpg"
-                        alt=""
-                    />
-                    <label htmlFor="fileInput">
-                        <i className="settingsPPIcon far fa-user-circle"></i>{" "}
-                    </label>
+        <div className="login">
+            <span className="loginTitle">Update Account</span>
+            {/* <span className="settingsDeleteTitle">Delete Account</span> */}
+            
+            <form className="loginForm" onSubmit={handleSubmit}>
+                <div className="form-floating mb-2">
                     <input
-                        id="fileInput"
-                        type="file"
-                        style={{ display: "none" }}
-                        className="settingsPPInput"
-                    />
+                        className="form-control w-100"
+                        id="floatingName"
+                        type="text"
+                        // placeholder={user.username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        />
+                    <label for="floatingName">Username</label>
                 </div>
-                <label>Username</label>
-                <input type="text" placeholder="Safak" name="name" />
-                <label>Email</label>
-
-                <input type="email" placeholder="safak@gmail.com" name="email" />
-                <label>Password</label>
-
-                <input type="password" placeholder="Password" name="password" />
-                <button className="settingsSubmitButton" type="submit">
+                <div className="form-floating mb-2">
+                    <input
+                        className="form-control w-100"
+                        id="floatingEmail"
+                        type="email"
+                        // placeholder={user.email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        />
+                    <label for="floatingEmail">Email</label>
+                </div>
+                <div className="form-floating mb-2">
+                    <input
+                        className="form-control w-100" 
+                        id="floatingPassword"
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        />
+                    <label for="floatingPassword">Password</label>
+                </div>
+                <button className="btn bg-secondary btn-block btn-lg gradient-custom-4 text-white" type="submit">
                     Update
                 </button>
+
+                {success && (
+                    <span style={{ color: "green", textAlign: "center", marginTop: "20px" }}>
+                        Your profile has been updated!
+                    </span>
+                )}
             </form>
-            </div>
+  
         </div>
-    )
+    );
 }
 
 export default ProfileSetting

@@ -1,5 +1,5 @@
 import React from 'react';
-import "./topbanner.css";
+import "./style.css";
 
 const Topbanner = () => {
     return (

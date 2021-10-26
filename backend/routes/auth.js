@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
   // LOGIN
   router.post("/login", async (req, res) => {
     try {
-        const user = await Agent.findOne({ email: req.body.email }); // findOne unique 
+        const user = await Agent.findOne({ username: req.body.username }); // findOne unique 
         !user && res.status(400).json("Wrong credentials!");
         
         // validate encrypted password

@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 });
 
 // UPDATE PROPERTY DETAILS
-router.put("/:id", async (req, res) => {
+router.put("/edit/:id", async (req, res) => {
     try {
         const property = await Property.findById(req.params.id);
         if (property.username === req.body.username) {

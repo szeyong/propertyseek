@@ -1,0 +1,132 @@
+.bannerTitles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Lora", serif;
+    color:darkslategrey;
+}
+  
+.bannerSubTitle {
+    position: absolute;
+    top: 3%;
+    font-size: 20px;
+}
+  
+.bannerMainTitle {
+    position: absolute;
+    top: 5%;
+    font-size: 100px;
+}
+
+.bannerImg {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    object-position: 100% 0;
+}
+
+.nav {
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+    font-family: "Josefin Sans", sans-serif;
+}
+  
+.navLeft, .navRight {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navCenter {
+    flex: 8;
+}
+
+.navList {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navListItem {
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.navListItem:hover{
+    color: gray;
+}
+
+.navProfileImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.navSearchIcon {
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+}
+
+.post {
+    width: 385px;
+    margin: 0px 25px 40px 25px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+.postImg {
+    width: 385px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+  
+.postInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.postCat {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    color: #be9656;
+    line-height: 19px;
+    margin-top: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+  
+  .postTitle {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+  
+  .postDate {
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 400;
+    color: #999999;
+    margin-top: 15px;
+  }
