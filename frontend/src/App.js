@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AddProperty from "./pages/AddProperty";
 import EditProperty from "./pages/EditProperty";
+import Contact from "./pages/Contact";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "./context/Context";
@@ -23,12 +24,12 @@ function App() {
         <Route path="/posts"><Home /></Route>
         <Route path="/register">{user ? <Home /> : <Register />}</Route>
         <Route path="/login">{user ? <Home /> : <Login />}</Route>
+        <Route path="/settings">{user ? <ProfileSetting /> : <Login />}</Route>
         <Route path="/property/:id"><PropertyDetail /></Route>
         <Route path="/manage">{user ? <AddProperty /> : <Login />}</Route>
-        <Route path="/settings">{user ? <ProfileSetting /> : <Login />}</Route>
         <Route path="/edit">{user ? <EditProperty /> : <Login />}</Route>
+        <Route path="/contact"><Contact /></Route>
       </Switch>
-
     </Router>
   );
 }

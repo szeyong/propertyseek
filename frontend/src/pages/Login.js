@@ -23,10 +23,12 @@ const Login = () => {
                 username: usernameRef.current.value,
                 password: passwordRef.current.value,
             });
+            console.log("login response", res)
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
 
         } catch (err) {
             dispatch({ type: "LOGIN_FAILURE" });
+            console.log({status: {err}})
         }
     };
 

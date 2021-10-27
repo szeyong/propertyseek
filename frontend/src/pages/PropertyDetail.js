@@ -45,17 +45,6 @@ const PropertyDetail = () => {
         } catch (err) {}
     };
 
-    // const handleUpdate = async () => {
-    //     try {
-    //         await axios.put(uri + `property/${property._id}`, {
-    //             username: user.username,
-    //             title,
-    //             description,
-    //         });
-    //         setUpdateProperty(false)
-    //     } catch (err) {}
-    // };
-
     return (
         <div className=" rounded mx-auto mw-50">
             <div className="container">
@@ -80,31 +69,41 @@ const PropertyDetail = () => {
                         <img
                             className="card-img-top rounded float-right"
                             src={property.photo3}
-                            // src={ImageFolderUri + property.photo1}
                             alt="" 
                         />
                     </div>
                 </div>
             </div>
-            <h1 className="card-title text-center mt-3">
-                {property.title}
-                {property.username === user?.username && (
-                    <div className="singlePostEdit">
-                        <Link to={`/edit/${idPath}`} className="link"><i className="singlePostIcon far fa-edit" href="/"></i></Link>
-                        {/* <i className="singlePostIcon far fa-edit" onClick={() => setUpdateProperty(true)}></i> */}
-                        <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
-                    </div>
-                    
-                )}
-            </h1>
+            <div className="container">
+                <h1 className="card-title text-center mt-3">
+                    {property.title}
+                    {property.username === user?.username && (
+                        <div className="singlePostEdit">
+                            <Link to={`/edit/${idPath}`} className="link">
+                                <i className="singlePostIcon far fa-edit" href="/"></i>
+                            </Link>
+                            <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
+                        </div>
+                    )}
+                </h1>
+            </div>
 
             <div className="container p-2">
                 <dl class="row">
                     <dt class="col-sm-3 mt-5">Property Agent</dt>
                     <dd class="col-sm-9 mt-5">
-                        <Link to={`/?user=${property.username}`} >
-                            {property.username} 
-                        </Link>
+                        <p>
+                            <Link to={`/?user=${property.username}`} >
+                                {property.username} 
+                            </Link>
+                        </p>
+                        <p>
+                        Book a viewing today 
+                            <Link to={"/contact"} >
+                                <i className="ms-2 far fa-envelope"></i>
+                            </Link>
+                        </p>
+                        
                     </dd>
 
                     <dt class="col-sm-3">Description</dt>
@@ -124,10 +123,13 @@ const PropertyDetail = () => {
                     </dd>
                     <dt class="col-sm-3">Location</dt>
                     <dd class="col-sm-9">{property.address}</dd>
+
                     <dt class="col-sm-3">Size</dt>
                     <dd class="col-sm-9">{property.sqft} sqft</dd>
+
                     <dt class="col-sm-3">Bedrooms</dt>
                     <dd class="col-sm-9">{property.bedrooms} rooms</dd>
+
                     <dt class="col-sm-3">Posted on</dt>
                     <dd class="col-sm-9 mb-5">{new Date(property.createdAt).toLocaleDateString()}</dd>
                 </dl>

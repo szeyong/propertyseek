@@ -20,15 +20,17 @@ router.post("/register", async (req, res) => {
     }
   });
   
-  // LOGIN
-  router.post("/login", async (req, res) => {
+// // LOGIN
+router.post("/login", async (req, res) => {
     try {
         const user = await Agent.findOne({ username: req.body.username }); // findOne unique 
-        !user && res.status(400).json("Wrong credentials!");
+        !user && res.status(400).json({message: "Wrong username!", status: 400});
+        console.log(user)
         
         // validate encrypted password
         const validated = await bcrypt.compare(req.body.password, user.password);
-        !validated && res.status(400).json("Wrong credentials!");
+        // !validated && res.status(400).json({message:"Wrong password!", status: 400});
+        !validated && res.send({message:"Wrong password!", status: 400});
         
         // show others data except password
         const { password, ...others } = user._doc;
@@ -36,6 +38,28 @@ router.post("/register", async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-  });
+});
+
+// LOGIN
+// router.post("/login", async (req, res) => {
+//     const { username, email, password } = req.body;
+//     console.log("get req", req.body)
+//     await Agent.findOne({username: req.body.username})
+//     .then( user => {
+//         try{
+//             const validated = bcrypt.compareSync(req.body.password, user.password);
+//             if( username && validated) {
+//                 const { password, ...others } =user._doc;
+//                 res.status(200).json(others).send({message: "Login Successful!"});
+//             } else {
+//                 res.send("issue")
+//             }
+//         } catch (err) {
+//             console.log("Login Error :", err)
+//             res.send("err")
+//         }
+
+//     })
+// });
   
-  module.exports = router;
+module.exports = router;
