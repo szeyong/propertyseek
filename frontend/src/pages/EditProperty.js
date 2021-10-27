@@ -149,7 +149,7 @@ const EditProperty = () => {
     };
 
     return (
-        <div className="center mt-4">
+        <div className="d-flex justify-content-center align-items-center container mt-4">
         <form onSubmit={handleSubmit}>                   
                 <div className="form-floating mt-2 mb-2">    
                     <input className="form-control w-70" id="inputTitle" value={title} onChange={(e)=> setTitle(e.target.value)} type="text" placeholder="Title"/>
@@ -160,7 +160,7 @@ const EditProperty = () => {
                     <label for="inputDesc">Short Description</label>
                 </div>
                 <div className="form-floating mt-2 mb-2">    
-                    <select className="form-select" id="floatingCat" onChange={(e)=> setCategory(e.target.value)} value={category}>
+                    <select className="form-select w-70" id="floatingCat" onChange={(e)=> setCategory(e.target.value)} value={category}>
                         <option selected>Choose a category</option>
                         <option value="Landed">Landed</option>
                         <option value="Condominium">Condominimum</option>
@@ -173,11 +173,24 @@ const EditProperty = () => {
                     <label for="inputAddress">Address</label>
                 </div>
                 <div className="form-floating mt-2 mb-2">    
-                    <select className="form-select" id="floatingDistrict" onChange={(e)=> setDistrict(e.target.value)} value={district}>
+                    <select className="form-select w-70" id="floatingDistrict" onChange={(e)=> setDistrict(e.target.value)} value={district}>
                         <option selected>Choose a district</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="21">21</option>
                     </select>
                     <label for="floatingDistrict">District</label>
                 </div>
@@ -193,14 +206,16 @@ const EditProperty = () => {
                     <input className="form-control w-70" id="inputBedrooms" onChange={(e)=> setBedrooms(e.target.value)} value={bedrooms} type="text" placeholder="Bedrooms"/>
                     <label for="inputBedrooms">Number of Bedrooms</label>
                 </div>
-                <div className="input-group mt-2 mb-7">    
-                    <input className="form-control" id="fileUpload" onChange={handlePhoto1} type="file" placeholder="Image" accept=".jpeg, .png, .jpg"/>
+                <div className="input mt-2 mb-7">    
+                    <input className="form-control w-70" id="fileUpload" onChange={handlePhoto1} type="file" placeholder="Image" accept=".jpeg, .png, .jpg"/>
                 </div>
-                {photo1 ? <img className="mt-2 mb-7" src={photo1} alt=""/> : <img className="mt-2" src="https://via.placeholder.com/400x250.png?text=No+Image+Selected" alt=""/>}
+                {photo1 ? <img className="img-thumbnail w-25 p-3 mt-2 mb-7" src={photo1} alt=""/> : <img className="mt-2" src="https://via.placeholder.com/400x250.png?text=No+Image+Selected" alt=""/>}
             <br/>
             <br/>
             {alertmsg} 
-            <button className="btn btn-dark text-white mt-4" onClick={handleSubmit} href="./" >Update Property</button>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button className="btn btn-dark text-white mt-4 mb-5" onClick={handleSubmit} href="./" >Update Property</button>
+            </div>
         </form>
     </div>
     );

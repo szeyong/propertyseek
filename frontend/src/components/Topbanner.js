@@ -6,7 +6,7 @@ const Topbanner = () => {
         <div className="banner">
             <div className="bannerTitles">
                 <span className="bannerMainTitle">PROPERTYSEEK</span>
-                <span className="bannerSubTitle">A boutique experience in house search</span>
+                <span className="bannerSubTitle">Home is where your story begins</span>
             </div>
             <img
                 className="bannerImg"

@@ -1,19 +1,20 @@
-import axios from 'axios';
 import { useEffect, useState, useContext } from "react";
-import { Context } from "../context/Context";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
+import { Context } from "../context/Context";
+import axios from 'axios';
 import NumberFormat from "react-number-format";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./stylepages.css";
 
 const PropertyDetail = () => {
     const [property, setProperty] = useState({});
     const { user } = useContext(Context);
-    const [updateProperty, setUpdateProperty] = useState(false);
+    // const [updateProperty, setUpdateProperty] = useState(false);
     // const [propertyId, setPropertyId] = useState("")
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    // const [title, setTitle] = useState("");
+    // const [description, setDescription] = useState("");
 
     const location = useLocation();
     console.log(location.pathname.split("/")[2]) 
@@ -44,88 +45,93 @@ const PropertyDetail = () => {
         } catch (err) {}
     };
 
-    const handleUpdate = async () => {
-        try {
-            await axios.put(uri + `property/${property._id}`, {
-                username: user.username,
-                title,
-                description,
-            });
-            setUpdateProperty(false)
-        } catch (err) {}
-    };
+    // const handleUpdate = async () => {
+    //     try {
+    //         await axios.put(uri + `property/${property._id}`, {
+    //             username: user.username,
+    //             title,
+    //             description,
+    //         });
+    //         setUpdateProperty(false)
+    //     } catch (err) {}
+    // };
 
     return (
-        <div className="singlePost">
-            <div className="singlePostWrapper">
-                {property.photo1 && (
-                    <img
-                        className="singlePostImg"
-                        src={property.photo1}
-                        // src={ImageFolderUri + property.photo1}
-                        alt="" 
-                    />
-                )}
-                { updateProperty ? (
-                    <input 
-                        type="text" 
-                        value={title}
-                        className="singlePostTitleInput"
-                        autoFocus
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                ) : (
-                    <h1 className="singlePostTitle">
-                        {property.title}
-                        {property.username === user?.username && (
-                            <div className="singlePostEdit">
-                                <Link to={`/edit/${idPath}`} className="link"><i className="singlePostIcon far fa-edit" href="/"></i></Link>
-                                {/* <i className="singlePostIcon far fa-edit" onClick={() => setUpdateProperty(true)}></i> */}
-                                <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
-                            </div>
-                            
-                        )}
-                    </h1>
-                )}
-                
-                <div className="singlePostInfo">
-                    <ul class="list-group list-group-flush">
-                        <li className="list-group-item">
-                            Agent: 
-                            <Link to={`/?user=${property.username}`} >
-                                {property.username} 
-                            </Link>
-                        </li>
-                        <li className="list-group-item">{property.description}</li>
-                        <li className="list-group-item">District {property.district}</li>
-                        <li className="list-group-item">Asking Price:  
-                            <NumberFormat 
-                                value={property.price} 
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                            />
-                        </li>
-                        <li className="list-group-item"> Location: {property.address} </li>
-                        <li className="list-group-item"> Size: {property.sqft} sqft </li>
-                        <li className="list-group-item"> Bedrooms: {property.bedrooms} </li>
-                        <li className="list-group-item">Posted on {new Date(property.createdAt).toLocaleDateString()}</li>
-                    </ul>
+        <div className=" rounded mx-auto mw-50">
+            <div className="container">
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <img
+                            className="card-img-top rounded float-left "
+                            src={property.photo1}
+                            // src={ImageFolderUri + property.photo1}
+                            alt="" 
+                        />
+                    </div>
+                    <div class="col-4">
+                        <img
+                            className="card-img-top rounded float-center"
+                            src={property.photo2}
+                            // src={ImageFolderUri + property.photo1}
+                            alt="" 
+                        />
+                    </div>
+                    <div class="col-4">
+                        <img
+                            className="card-img-top rounded float-right"
+                            src={property.photo3}
+                            // src={ImageFolderUri + property.photo1}
+                            alt="" 
+                        />
+                    </div>
                 </div>
-
-                {/* {updateProperty ? (
-                    <textarea
-                        className="singlePostDescInput"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                    ) : (
-                    <p className="singlePostDesc">{description}</p>
-                )}
-                {updateProperty && (
-                    <button className="singlePostButton" onClick={handleUpdate}>Update</button>
-                )} */}
             </div>
+            <h1 className="card-title text-center mt-3">
+                {property.title}
+                {property.username === user?.username && (
+                    <div className="singlePostEdit">
+                        <Link to={`/edit/${idPath}`} className="link"><i className="singlePostIcon far fa-edit" href="/"></i></Link>
+                        {/* <i className="singlePostIcon far fa-edit" onClick={() => setUpdateProperty(true)}></i> */}
+                        <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
+                    </div>
+                    
+                )}
+            </h1>
+
+            <div className="container p-2">
+                <dl class="row">
+                    <dt class="col-sm-3 mt-5">Property Agent</dt>
+                    <dd class="col-sm-9 mt-5">
+                        <Link to={`/?user=${property.username}`} >
+                            {property.username} 
+                        </Link>
+                    </dd>
+
+                    <dt class="col-sm-3">Description</dt>
+                    <dd class="col-sm-9">{property.description}</dd>
+
+                    <dt class="col-sm-3">District</dt>
+                    <dd class="col-sm-9">{property.district}</dd>
+
+                    <dt class="col-sm-3">Asking Price</dt>
+                    <dd class="col-sm-9">
+                        <NumberFormat 
+                            value={property.price} 
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                        />
+                    </dd>
+                    <dt class="col-sm-3">Location</dt>
+                    <dd class="col-sm-9">{property.address}</dd>
+                    <dt class="col-sm-3">Size</dt>
+                    <dd class="col-sm-9">{property.sqft} sqft</dd>
+                    <dt class="col-sm-3">Bedrooms</dt>
+                    <dd class="col-sm-9">{property.bedrooms} rooms</dd>
+                    <dt class="col-sm-3">Posted on</dt>
+                    <dd class="col-sm-9 mb-5">{new Date(property.createdAt).toLocaleDateString()}</dd>
+                </dl>
+            </div> 
         </div>
     )
 }

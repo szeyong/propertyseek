@@ -7,18 +7,18 @@ const Navbar = () => {
     // const user = false;
     const { user, dispatch } = useContext(Context);
 
-    // const ImageFolderUri = "http://localhost:5000/images/";
-
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" });
     };
 
     return (
-      <div className="nav">
+    <div className="nav">
         <div className="navLeft">
             <ul className="navList">
                 <li className="navListItem">
-                    <Link className="link" to="/">Home</Link>
+                    <Link className="link" to="/">
+                        <i class="fas fa-house-user"></i>
+                    </Link>
                 </li>
                 {user && 
                 <li className="navListItem">
@@ -32,13 +32,13 @@ const Navbar = () => {
 
         <div className="navCenter">
             <ul className="navList">
-                <li className="navListItem">
+                <li className="navListItem fw-bold">
                     <Link to={`/?category=Landed`} className="link">Landed</Link>
                 </li>
-                <li className="navListItem">
+                <li className="navListItem fw-bold">
                     <Link to={`/?category=Condominium`} className="link">Condominium</Link>
                 </li>
-                <li className="navListItem">
+                <li className="navListItem fw-bold">
                     <Link to={`/?category=HDB`} className="link">HDB</Link>
                 </li>
             </ul>
@@ -48,11 +48,13 @@ const Navbar = () => {
         {user ? (
             <ul className="navList">
                 <li className="navListItem">
-                    Welcome {user.username}!
+                    <Link className="link" to={`/?user=${user.username}`}>
+                        Welcome {user.username}!
+                    </Link>
                 </li>
                 <li className="navListItem">
                     <Link className="link" to="/settings">
-                        Settings
+                        <i class="fas fa-user-cog"></i>
                     </Link>
                 </li>
             </ul>
@@ -64,22 +66,16 @@ const Navbar = () => {
             //     />
             // </Link>
         ) : (
-          <ul className="navList">
-            <li className="navListItem">
-                <Link className="link" to="/login">
-                    Agent Login
-                </Link>
-            </li>
-            {/* <li className="navListItem">
-                <Link className="link" to="/register">
-                    REGISTER
-                </Link>
-            </li> */}
-          </ul>
+            <ul className="navList">
+                <li className="navListItem">
+                    <Link className="link" to="/login">
+                        Agent Login
+                    </Link>
+                </li>
+            </ul>
         )}
-        {/* <i className="navSearchIcon fas fa-search"></i> */}
-      </div>
-      </div>
+        </div>
+    </div>
     );
 }
 

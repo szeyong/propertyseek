@@ -1,29 +1,31 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import "./style.css";
 import { useContext } from "react";
 import { Context } from "../context/Context";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./style.css";
+
 
 const PropertyCard = ({card}) => {
     console.log(card)
     const { user } = useContext(Context);
     
     return (
-        <div className="post">
+        <div className="card mx-auto mb-5">
             {card.photo1 && (
                 <img
-                    className="postImg"
+                    className="cardImg"
                     src={card.photo1}
                     alt="" 
                 />
             )}
-            <div className="postInfo">
-                <span className="postCat">{card.category}</span>
-                <span className="postCat">Located in District {card.district}</span>
+            <div className="cardInfo">
+                <p className="card-text mt-2"><small className="text-muted">{card.category}</small></p>
+                <p className="card-text fw-light text-success text-opacity-75">District {card.district}</p>
                 <Link to={`/property/${card._id}`} className="link">
-                    <span className="postTitle">{card.title}</span>
+                    <h5 className="card-title fw-bold">{card.title}</h5>
                 </Link>
-                <span className="postTitle">
+                <span className="card-subtitle mb-2 text-muted">
                     {(card.price).toLocaleString('en-US', {
                         style: 'currency', 
                         currency: 'USD', 
@@ -31,14 +33,21 @@ const PropertyCard = ({card}) => {
                         maximumSignificantDigits: 3,
                     })}
                 </span>
-                <hr/>
                 {card.username === user?.username && (
-                    <div className="singlePostEdit">
-                        <Link to={`/edit/${card._id}`} className="link"><i className="singlePostIcon far fa-edit" href="/"></i></Link>
+                    <div className="card-text fw-bold">
+                        <Link to={`/edit/${card._id}`} className="card-link"><i className="singlePostIcon far fa-edit" href="/"></i></Link>
                     </div>
                 )}
-                <span className="postDate"><Link to={`/?user=${card.username}`} >{card.username}</Link></span>
-                <span className="postDate">Posted on {new Date(card.createdAt).toLocaleDateString()}</span>
+                <p className="card-text mt-2 fst-italic fw-light">
+                    <small className="text-muted">
+                        Property Agent : <Link to={`/?user=${card.username}`} > {card.username}</Link>
+                    </small>
+                </p>
+                <p className="card-text">
+                    <small className="text-muted">
+                        Posted on {new Date(card.createdAt).toLocaleDateString()}
+                    </small>
+                </p>
             </div>
         </div>
     )
