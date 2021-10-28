@@ -9,6 +9,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" });
+        window.location.href = "/"
     };
 
     return (
@@ -20,13 +21,16 @@ const Navbar = () => {
                         <i class="fas fa-house-user"></i>
                     </Link>
                 </li>
-                {user && 
+            {user && 
                 <li className="navListItem">
                     <Link className="link" to="/manage">
                         Add Property
                     </Link>
-                </li>}
-                {user && <li className="navListItem" onClick={handleLogout}>Logout</li>}
+                </li>
+            }
+            {user && 
+                <li className="navListItem" onClick={handleLogout}>Logout</li>
+            }
             </ul>
         </div>
 
@@ -52,19 +56,12 @@ const Navbar = () => {
                         Welcome {user.username}!
                     </Link>
                 </li>
-                <li className="navListItem">
+                {/* <li className="navListItem">
                     <Link className="link" to="/settings">
                         <i class="fas fa-user-cog"></i>
                     </Link>
-                </li>
+                </li> */}
             </ul>
-            // <Link className="link" to="/settings">
-            //     <img
-            //     className="navProfileImg"
-            //     src={ImageFolderUri + user.profileImage}
-            //     alt=""
-            //     />
-            // </Link>
         ) : (
             <ul className="navList">
                 <li className="navListItem">

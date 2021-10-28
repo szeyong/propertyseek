@@ -5,10 +5,11 @@ import { Context } from "../context/Context";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 
-
 const PropertyCard = ({card}) => {
-    console.log(card)
+    
     const { user } = useContext(Context);
+    console.log("propertycard get:", card)
+    console.log("propertycard user context",{user})
     
     return (
         <div className="card mx-auto mb-5">

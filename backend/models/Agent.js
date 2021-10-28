@@ -14,11 +14,7 @@ const AgentSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    },
-    profileImage: {
-        type: String,
-        default: "",
-    },
+    }
 }, { timestamps: true });
   
 module.exports = mongoose.model("Agent", AgentSchema);

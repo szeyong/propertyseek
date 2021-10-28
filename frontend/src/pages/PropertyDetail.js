@@ -8,13 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./stylepages.css";
 
 const PropertyDetail = () => {
-    const [property, setProperty] = useState({});
     const { user } = useContext(Context);
-    // const [updateProperty, setUpdateProperty] = useState(false);
-    // const [propertyId, setPropertyId] = useState("")
-
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
+    const [property, setProperty] = useState({});
 
     const location = useLocation();
     console.log(location.pathname.split("/")[2]) 
@@ -24,8 +19,6 @@ const PropertyDetail = () => {
     // setPropertyId(idPath);
 
     const uri = "http://localhost:5000/api/"
-
-    // const ImageFolderUri = "http://localhost:5000/images/";
 
     useEffect(() => {
         const getProperty = async () => {

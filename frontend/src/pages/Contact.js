@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import "./stylepages.css";
 
+// THIS IS ONLY A MOCKUP CONTACT FORM, DOES NOT PERFORM ANY FUNCTIONS
+
 const Contact = () => {
     return (
         <div className="container">

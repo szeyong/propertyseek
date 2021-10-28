@@ -17,20 +17,37 @@ const EditProperty = () => {
     const [photo2, setPhoto2] = useState("");
     const [photo3, setPhoto3] = useState("");
     
-    const [data, setData] = useState([]);
-
-    // const [property, setProperty] = useState("");
     const [alertmsg, setAlertmsg] = useState("");
 
     const { user } = useContext(Context);
     const username = user.username;
 
+    const uri = "http://localhost:5000/api/"
+
     const location = useLocation();
     console.log("location ID:", location.pathname.split("/")[2]) 
     const idPath = location.pathname.split("/")[2]; 
-    
 
-    const uri = "http://localhost:5000/api/"
+    useEffect(() => {
+        axios.get((uri + `property/${idPath}`))
+        .then(response => {
+            console.log("EditProperty response data:",response.data);
+            setTitle(response.data.title)
+            setDescription(response.data.description);
+            setCategory(response.data.category);
+            setAddress(response.data.address);
+            setDistrict(response.data.district);
+            setPrice(response.data.price);
+            setSqft(response.data.sqft);
+            setBedrooms(response.data.bedrooms);
+            setPhoto1(response.data.photo1)
+            setPhoto2(response.data.photo2)
+            setPhoto3(response.data.photo3)
+        })
+        .catch((error) => {
+            console.log({status: 'bad', msg: error.message})
+        })
+    },[idPath]) // when idPath changes, activate useEffect
 
     const convertToBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -48,45 +65,18 @@ const EditProperty = () => {
     const handlePhoto1 = async (e) => {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
-        console.log(base64);
         setPhoto1(base64);
     };
     const handlePhoto2 = async (e) => {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
-        console.log(base64);
         setPhoto2(base64);
     };
     const handlePhoto3 = async (e) => {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
-        console.log(base64);
         setPhoto3(base64);
     };
-
-
-    useEffect(() => {
-        axios.get((uri + `property/${idPath}`))
-        .then(response =>{
-            console.log('received data');
-            console.log(response.data);
-            setTitle(response.data.title)
-            setDescription(response.data.description);
-            setCategory(response.data.category);
-            setAddress(response.data.address);
-            setDistrict(response.data.district);
-            setPrice(response.data.price);
-            setSqft(response.data.sqft);
-            setBedrooms(response.data.bedrooms);
-            setPhoto1(response.data.photo1)
-            setPhoto2(response.data.photo2)
-            setPhoto3(response.data.photo3)
-            console.log("Current",data);
-        })
-        .catch((error)=> {
-            console.log({status: 'bad', msg: error.message})
-        })
-    },[])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

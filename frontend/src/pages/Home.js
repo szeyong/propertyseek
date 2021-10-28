@@ -7,7 +7,7 @@ import "./stylepages.css";
 const Home = () => {
     const [cards, setCards] = useState([]);
     const {search} = useLocation();
-    console.log("search:"+search)
+    console.log("search:", search)
 
     const uri = "http://localhost:5000/api/"
 
@@ -18,14 +18,14 @@ const Home = () => {
         }
         fetchPropertyCards();
     },[search]);
-    console.log("cards: "+cards)
+    
+    console.log("cards: ", cards)
 
     return (
         <div className="posts" >
             {cards.map( (i) => (
                 <PropertyCard card={i} />
             ))}
-            
         </div>
     )
 }

@@ -14,8 +14,6 @@ const ProfileSetting = () => {
 
     const uri = "http://localhost:5000/api/"
 
-    // const ImageFolderUri = "http://localhost:5000/images/";
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 

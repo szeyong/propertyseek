@@ -39,19 +39,16 @@ const AddProperty = () => {
     const handlePhoto1 = async (e) => {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
-        console.log(base64);
         setPhoto1(base64);
     };
     const handlePhoto2 = async (e) => {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
-        console.log(base64);
         setPhoto2(base64);
     };
     const handlePhoto3 = async (e) => {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
-        console.log(base64);
         setPhoto3(base64);
     };
 
@@ -138,8 +135,8 @@ const AddProperty = () => {
                     <label for="inputDesc">Short Description</label>
                 </div>
                 <div className="form-floating mt-2 mb-2">    
-                    <select c
-                        lassName="form-select form-control w-70" 
+                    <select 
+                        className="form-select form-control w-70" 
                         id="floatingCat" 
                         onChange={(e)=> setCategory(e.target.value)}
                     >
@@ -275,7 +272,9 @@ const AddProperty = () => {
                 }
             <br/>
             <br/>
+            
             {alertmsg} 
+
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button 
                     className="btn btn-dark text-white mt-4 mb-5" 

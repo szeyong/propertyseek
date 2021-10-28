@@ -13,7 +13,6 @@ const Topbanner = () => {
                 src="../bannerImage.jpeg"
                 alt="" 
             />
-            
         </div>
     )
 }
